@@ -7,9 +7,11 @@ Server ce biti na 'localhost:4000'
 Kada se server pokrene, otvoriti localhost iz vise tabova, log out, promeniti korisnike, ucestvovati u komunikaciji.
 Kada se korisnik izloguje, njegov online key iz base se brise, balonce posivi i clanovi General chata se obaveste. Kada se uloguje, obrnut proces.
 
+Glavne redis komande u index.js u rutama.
 Pokretanjem redis-cli moze se pogledati i baza.
 
 Korisnici se pre svega dodaju koristeci createDemoData() funkcije
+
 
 Inicijalizacija
 Radi jednostavnosti, proverava se ključ sa total_users vrednošću: ako ne postoji, popunjavamo Redis bazu podataka početnim podacima. EXISTS total_users (proverava da li ključ postoji)

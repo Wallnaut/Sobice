@@ -5,7 +5,7 @@ import Logo from "../Logo";
 import "./style.css";
 import { useEffect } from "react";
 
-const DEMO_USERS = ["Pablo", "Joe", "Mary", "Pavle", "Momcilo", "Mihajlo"];
+const DEMO_USERS = ["Pavle", "Momcilo", "Mihajlo"];
 
 export default function Login({ onLogIn }) {
   const [username, setUsername] = useState(

@@ -60,18 +60,12 @@ const useAppHandlers = () => {
   const { user, onLogIn, onLogOut, loading } = useUser(onUserLoaded, dispatch);
   const [socket, connected] = useSocket(user, dispatch);
 
-  /** Socket joins specific rooms once they are added */
+  
   useEffect(() => {
     if (user === null) {
-      /** We are logged out */
-      /** But it's necessary to pre-populate the main room, so the user won't wait for messages once he's logged in */
       return;
     }
     if (connected) {
-      /**
-       * The socket needs to be joined to the newly added rooms
-       * on an active connection.
-       */
       const newRooms = [];
       Object.keys(state.rooms).forEach((roomId) => {
         const room = state.rooms[roomId];
@@ -85,10 +79,7 @@ const useAppHandlers = () => {
         dispatch({ type: "set rooms", payload: newRooms });
       }
     } else {
-      /**
-       * It's necessary to set disconnected flags on rooms
-       * once the client is not connected
-       */
+      
       const newRooms = [];
       Object.keys(state.rooms).forEach((roomId) => {
         const room = state.rooms[roomId];
@@ -97,30 +88,29 @@ const useAppHandlers = () => {
         }
         newRooms.push({ ...room, connected: false });
       });
-      /** Only update the state if it's only necessary */
+     
       if (newRooms.length !== 0) {
         dispatch({ type: "set rooms", payload: newRooms });
       }
     }
   }, [user, connected, dispatch, socket, state.rooms, state.users]);
 
-  /** Populate default rooms when user is not null */
+  
   useEffect(() => {
     if (Object.values(state.rooms).length === 0 && user !== null) {
-      /** First of all fetch online users. */
       getOnlineUsers().then((users) => {
         dispatch({
           type: "append users",
           payload: users,
         });
       });
-      /** Then get rooms. */
+      
       getRooms(user.id).then((rooms) => {
         const payload = [];
         rooms.forEach(({ id, names }) => {
           payload.push({ id, name: parseRoomName(names, user.username) });
         });
-        /** Here we also can populate the state with default chat rooms */
+        
         dispatch({
           type: "set rooms",
           payload,
@@ -136,7 +126,6 @@ const useAppHandlers = () => {
         return;
       }
       if (!socket) {
-        /** Normally there shouldn't be such case. */
         console.error("Couldn't send message");
       }
       socket.emit("message", {

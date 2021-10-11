@@ -1,6 +1,6 @@
 // @ts-check
 const bcrypt = require('bcrypt');
-const { incr, set, hmset, sadd, hmget, exists,
+const { incr, set, hmset, sadd, hmget, exists, zremrangebyscore, zcount,
   client: redisClient,
 } = require('./redis');
 
@@ -73,6 +73,8 @@ const getMessages = async (roomId = "0", offset = 0, size = 50) => {
   if (!roomExists) {
     return [];
   } else {
+    let x = await zcount(roomKey, 0, 100)
+    await zremrangebyscore(roomKey, x-15, 100);
     return new Promise((resolve, reject) => {
       redisClient.zrevrange(roomKey, offset, offset + size, (err, values) => {
         if (err) {

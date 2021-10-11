@@ -6,13 +6,13 @@ import ChatIcon from "./ChatIcon";
 const AvatarImage = ({ name, id }) => {
   const url = useMemo(() => {
     const av = getAvatarByUserAndRoomId("" + id);
-    if (name === "Mary") {
+    if (name === "Pavle") {
       return `${process.env.PUBLIC_URL}/avatars/0.jpg`;
-    } else if (name === "Pablo") {
+    } else if (name === "Pavle") {
       return `${process.env.PUBLIC_URL}/avatars/2.jpg`;
-    } else if (name === "Joe") {
+    } else if (name === "Momcilo") {
       return `${process.env.PUBLIC_URL}/avatars/9.jpg`;
-    } else if (name === "Alex") {
+    } else if (name === "Mihajlo") {
       return `${process.env.PUBLIC_URL}/avatars/8.jpg`;
     }
     return av;

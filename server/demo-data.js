@@ -4,9 +4,9 @@ const { createUser, createPrivateRoom, getPrivateRoomId } = require('./utils');
 
 const demoPassword = 'password123';
 
-const demoUsers = ["Momcilo", "Mihajlo", "Pavle"];
+const demoUsers = ["Pavle","Momcilo","Mihajlo"];
 
-const greetings = [];
+const greetings = ["Najtopliji pozdravi"];
 
 const messages = [];
 
@@ -21,7 +21,7 @@ const addMessage = async (roomId, fromId, content, timestamp = moment().unix()) 
     message: content,
     roomId,
   };
-  /** salje se pozdrav */
+  
   await zadd(roomKey, "" + message.date, JSON.stringify(message));
 };
 

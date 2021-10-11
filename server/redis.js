@@ -61,6 +61,10 @@ module.exports = {
     ),
   zadd: (key = "key", key2 = "", value) =>
     new Promise((a, b) => client.zadd(key, key2, value, resolvePromise(a, b))),
+  zremrangebyscore: (key = "key", value_min, value_max) =>
+  new Promise((a, b) => client.zremrangebyscore(key, value_min, value_max, resolvePromise(a, b))),
+  zcount: (key = "key", value_min, value_max) =>
+  new Promise((a, b) => client.zcount(key, value_min, value_max, resolvePromise(a, b))),
   sadd: (key = "key", value) =>
     new Promise((a, b) => client.sadd(key, value, resolvePromise(a, b))),
   hmget: (key = "key", key2 = "") =>
