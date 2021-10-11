@@ -1,5 +1,7 @@
 Za pokretanje je potrebno imati instaliran yarn.
-Iz ovog direkotrijuma (/Sobice/) se pokrece 'yarn start'
+Iz ovog direkotrijuma (/Sobice/) se pokrece:
+- prvo 'yarn' - za povlacenje paketa
+- zatim 'yarn start'
 Server ce biti na 'localhost:4000'
 
 Kada se server pokrene, otvoriti localhost iz vise tabova, log out, promeniti korisnike, ucestvovati u komunikaciji.
