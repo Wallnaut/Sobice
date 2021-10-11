@@ -18,7 +18,7 @@ export const parseRoomName = (names, username) => {
   return names[0];
 };
 
-/** Get an avatar for a room or a user */
+
 export const getAvatarByUserAndRoomId = (roomId = "1") => {
   const TOTAL_IMAGES = 13;
   const seed1 = 654;
@@ -59,7 +59,7 @@ export const populateUsersFromLoadedMessages = async (users, dispatch, messages)
   );
 
   if (ids.length !== 0) {
-    /** We need to fetch users first */
+
     const newUsers = await getUsers(ids);
     dispatch({
       type: "append users",

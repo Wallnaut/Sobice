@@ -7,14 +7,12 @@ export const MESSAGES_TO_LOAD = 15;
 
 const url = x => `${BASE_URL}${x}`;
 
-/** Checks if there's an existing session. */
 export const getMe = () => {
   return axios.get(url('/me'))
     .then(x => x.data)
     .catch(_ => null);
 };
 
-/** Handle user log in */
 export const login = (username, password) => {
   return axios.post(url('/login'), {
     username,
@@ -30,7 +28,7 @@ export const logOut = () => {
 };
 
 /** 
- * Function for checking which deployment urls exist.
+ *
  * 
  * @returns {Promise<{
  *   heroku?: string;
@@ -40,13 +38,13 @@ export const logOut = () => {
  * }>} 
  */
 
-/** This was used to get a random login name (for demo purposes). */
+
 export const getRandomName = () => {
   return axios.get(url('/randomname')).then(x => x.data);
 };
 
 /**
- * Load messages
+ * 
  * 
  * @param {string} id room id
  * @param {number} offset 
@@ -73,19 +71,19 @@ export const getPreloadedRoom = async () => {
 };
 
 /** 
- * Fetch users by requested ids
+ * 
  * @param {Array<number | string>} ids
  */
 export const getUsers = (ids) => {
   return axios.get(url(`/users`), { params: { ids } }).then(x => x.data);
 };
 
-/** Fetch users which are online */
+
 export const getOnlineUsers = () => {
   return axios.get(url(`/users/online`)).then(x => x.data);
 };
 
-/** This one is called on a private messages room created. */
+
 export const addRoom = async (user1, user2) => {
   return axios.post(url(`/room`), { user1, user2 }).then(x => x.data);
 };

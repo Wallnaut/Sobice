@@ -15,7 +15,6 @@ const updateUser = (newUser, dispatch, infoMessage) => {
       payload: {
         id: "0",
         message: {
-          /** Date isn't shown in the info message, so we only need a unique value */
           date: Math.random() * 10000,
           from: "info",
           message: infoMessage,
@@ -32,7 +31,6 @@ const useSocket = (user, dispatch) => {
   const socketRef = useRef(null);
   const socket = socketRef.current;
 
-  /** First of all it's necessary to handle the socket io connection */
   useEffect(() => {
     if (user === null) {
       if (socket !== null) {
@@ -49,10 +47,7 @@ const useSocket = (user, dispatch) => {
     }
   }, [user, socket]);
 
-  /**
-   * Once we are sure the socket io object is initialized
-   * Add event listeners.
-   */
+  
   useEffect(() => {
     if (connected && user) {
       socket.on("user.connected", (newUser) => {
@@ -83,7 +78,7 @@ const useSocket = (user, dispatch) => {
         });
       });
     } else {
-      /** If there was a log out, we need to clear existing listeners on an active socket connection */
+      
       if (socket) {
         socket.off("user.connected");
         socket.off("user.disconnected");
@@ -96,12 +91,12 @@ const useSocket = (user, dispatch) => {
   return [socket, connected];
 };
 
-/** User management hook. */
+
 const useUser = (onUserLoaded = (user) => { }, dispatch) => {
   const [loading, setLoading] = useState(true);
   /** @type {[import('./state.js').UserEntry | null, React.Dispatch<import('./state.js').UserEntry>]} */
   const [user, setUser] = useState(null);
-  /** Callback used in log in form. */
+  
   const onLogIn = (
     username = "",
     password = "",
@@ -118,17 +113,15 @@ const useUser = (onUserLoaded = (user) => { }, dispatch) => {
       .finally(() => onLoading(false));
   };
 
-  /** Log out form */
+  
   const onLogOut = async () => {
     logOut().then(() => {
       setUser(null);
-      /** This will clear the store, to completely re-initialize an app on the next login. */
       dispatch({ type: "clear" });
       setLoading(true);
     });
   };
 
-  /** Runs once when the component is mounted to check if there's user stored in cookies */
   useEffect(() => {
     if (!loading) {
       return;
